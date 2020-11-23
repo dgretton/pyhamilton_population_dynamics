@@ -323,9 +323,10 @@ def nonzero_transfers(transfer_matrix, to_plate, for_matrix_rows):
                 continue
             disp_agenda[channel_idx].append((to_plate, to_i)) # construct ragged array of transfer destinations for each channel
             disp_vols_agenda[channel_idx].append(trans_vol) # construct parallel ragged array of transfer volumes
-    return zip(zip_longest(*disp_agenda), zip_longest(*disp_vols_agenda)) # fill in None entries to make ragged arrays square
+    return zip_longest(*disp_agenda), zip_longest(*disp_vols_agenda) # fill in None entries to make ragged arrays square
 
 def next_tips_wash_if_needed():
+    tips_tups_gen = iter(())
     try:
         return next(tips_tups_gen)
     except StopIteration:
